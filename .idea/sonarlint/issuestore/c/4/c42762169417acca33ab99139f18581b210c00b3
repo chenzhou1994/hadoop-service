@@ -1,5 +1,0 @@
-
-[squid:S1118":Add a private constructor to hide the implicit public one.(¦Í™ıÿÿÿÿ8éŠ²Ûå,
-ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ê×òüÿÿÿÿ8ıªÛå,
-squid:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ŒúåŠøÿÿÿÿ8éŠ²Ûå,
-ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨»éÎÿÿÿÿÿ8éŠ²Ûå,

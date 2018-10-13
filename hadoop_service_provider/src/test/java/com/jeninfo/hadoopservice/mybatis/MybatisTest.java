@@ -18,6 +18,6 @@ public class MybatisTest {
 
     @Test
     public void test01(){
-        //userMapper.selectAll().stream().forEach(System.out::println);
+        userMapper.selectAll().stream().forEach(System.out::println);
     }
 }

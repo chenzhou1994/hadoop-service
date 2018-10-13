@@ -1,5 +1,6 @@
 package com.jeninfo.hadoopservice.controller;
 
+import com.jeninfo.hadoopservice.Msg;
 import com.jeninfo.hadoopservice.model.User;
 import com.jeninfo.hadoopservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/select/all", method = RequestMethod.GET)
-    public List<User> selectAll(@RequestParam String page, @RequestParam String pageSize) {
-        return userService.selectAll(Integer.parseInt(page), Integer.parseInt(pageSize));
+    public Msg selectAll(@RequestParam String page, @RequestParam String pageSize) {
+        return Msg.renderSuccess("处理成功", 0x342, userService.selectAll(Integer.parseInt(page), Integer.parseInt(pageSize)));
     }
 }
