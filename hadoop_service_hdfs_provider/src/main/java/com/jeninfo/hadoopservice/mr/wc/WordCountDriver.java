@@ -55,6 +55,9 @@ public class WordCountDriver {
         return result;
     }
 
+    /**
+     * map阶段
+     */
     public static class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
         private Text w = new Text();
         private IntWritable one = new IntWritable(1);
@@ -69,6 +72,9 @@ public class WordCountDriver {
         }
     }
 
+    /**
+     * reducer阶段
+     */
     public static class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
         @Override
         protected void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
@@ -80,6 +86,9 @@ public class WordCountDriver {
         }
     }
 
+    /**
+     * 自定义分区
+     */
     public static class WordCountPartitioner extends Partitioner<Text, IntWritable> {
         @Override
         public int getPartition(Text key, IntWritable intWritable, int i) {

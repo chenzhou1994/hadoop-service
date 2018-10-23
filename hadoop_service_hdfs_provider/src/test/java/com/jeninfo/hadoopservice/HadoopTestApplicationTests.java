@@ -1,5 +1,9 @@
 package com.jeninfo.hadoopservice;
 
+import com.jeninfo.hadoopservice.mr.flow.FlowCountAllSortDriver;
+import com.jeninfo.hadoopservice.mr.flow.FlowCountDriver;
+import com.jeninfo.hadoopservice.mr.order.OrderDriver;
+import com.jeninfo.hadoopservice.mr.video.VideoCountDriver;
 import com.jeninfo.hadoopservice.mr.wc.WordCountDriver;
 import com.jeninfo.hadoopservice.service.HdfsService;
 import org.apache.hadoop.fs.BlockLocation;
@@ -27,8 +31,8 @@ public class HadoopTestApplicationTests {
     @Test
     public void test01() throws Exception {
         // testReadFile();
-        String[] args = {"G:\\big_datas\\mr\\wc.txt", "G:\\result"};
-        WordCountDriver.wcmain(args);
+        String[] args = {"G:\\big_datas\\mr\\GroupingComparator.txt", "G:\\result"};
+        OrderDriver.OrderMain(args);
     }
 
     private void testReadFile() throws Exception {

@@ -18,6 +18,7 @@ import java.io.IOException;
  * @author chenzhou
  * <p>
  * 5. 将统计结果按照总流量倒序排序（全排序,实现WritableComparable,重写compareTo方法）
+ * 拿到的是上一个统计程序输出的结果
  * <p>
  * 6. 不同省份输出文件内部排序（部分排序,增加自定义分区类）
  */
@@ -53,7 +54,7 @@ public class FlowCountAllSortDriver {
 
     /**
      * map阶段
-     * 输出格式：<手机号, flowBean('上行流量'，'下行流量','总流量')>
+     * 输出格式：<flowBean('上行流量'，'下行流量','总流量')， 手机号>
      */
     public static class FlowCountAllSortMapper extends Mapper<LongWritable, Text, FlowBean, Text> {
         private Text phone = new Text();
@@ -68,8 +69,12 @@ public class FlowCountAllSortDriver {
             String[] fields = line.split("\t");
             String phoneNbr = fields[0];
 
-            long upFlow = Long.parseLong(fields[1]);
-            long downFlow = Long.parseLong(fields[2]);
+            // 4 取出上行流量和下行流量
+            long upFlow = Long.parseLong(fields[fields.length - 3]);
+            long downFlow = Long.parseLong(fields[fields.length - 2]);
+
+            //long upFlow = Long.parseLong(fields[1]);
+            //long downFlow = Long.parseLong(fields[2]);
 
             // 3 封装对象
             flowBean.setUpFlow(upFlow).setDownFlow(downFlow).setSumFlow(upFlow + downFlow);
