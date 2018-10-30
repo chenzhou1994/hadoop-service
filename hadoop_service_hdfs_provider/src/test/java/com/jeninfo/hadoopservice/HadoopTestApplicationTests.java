@@ -6,6 +6,7 @@ import com.jeninfo.hadoopservice.mr.flow.FlowCountDriver;
 import com.jeninfo.hadoopservice.mr.order.OrderDriver;
 import com.jeninfo.hadoopservice.mr.video.VideoCountDriver;
 import com.jeninfo.hadoopservice.mr.wc.WordCountDriver;
+import com.jeninfo.hadoopservice.service.HbaseService;
 import com.jeninfo.hadoopservice.service.HdfsService;
 import org.apache.hadoop.fs.BlockLocation;
 import org.apache.hadoop.fs.FileSystem;
@@ -35,11 +36,16 @@ public class HadoopTestApplicationTests {
     @Autowired
     private FileSystem fileSystem;
     @Autowired
-    private org.apache.hadoop.conf.Configuration configuration;
+    private HbaseService hbaseService;
 
     @Test
     public void test01() throws Exception {
-        System.out.println("====" + configuration.get("hbase.zookeeper.quorum"));
+        // System.out.println("====" + configuration.get("hbase.zookeeper.quorum"));
+        //boolean exits = hbaseService.isTableExits("cz");
+        //boolean user = hbaseService.createTable("user", new String[]{"info_one", "info_two"});
+        //System.out.println("===>" + user);
+        //hbaseService.addRow("user", "1001", "info_one", "name", "张三");
+        hbaseService.scanTable("user");
     }
 
     private void testReadFile() throws Exception {
