@@ -1,5 +1,6 @@
 package com.jeninfo.hadoopservice;
 
+import com.jeninfo.hadoopservice.config.HBaseProperties;
 import com.jeninfo.hadoopservice.mr.flow.FlowCountAllSortDriver;
 import com.jeninfo.hadoopservice.mr.flow.FlowCountDriver;
 import com.jeninfo.hadoopservice.mr.order.OrderDriver;
@@ -8,10 +9,16 @@ import com.jeninfo.hadoopservice.mr.wc.WordCountDriver;
 import com.jeninfo.hadoopservice.service.HdfsService;
 import org.apache.hadoop.fs.BlockLocation;
 import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.client.Admin;
+import org.apache.hadoop.hbase.client.Connection;
+import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
@@ -27,12 +34,12 @@ public class HadoopTestApplicationTests {
     private HdfsService hdfsService;
     @Autowired
     private FileSystem fileSystem;
+    @Autowired
+    private org.apache.hadoop.conf.Configuration configuration;
 
     @Test
     public void test01() throws Exception {
-        // testReadFile();
-        String[] args = {"G:\\big_datas\\mr\\GroupingComparator.txt", "G:\\result"};
-        OrderDriver.OrderMain(args);
+        System.out.println("====" + configuration.get("hbase.zookeeper.quorum"));
     }
 
     private void testReadFile() throws Exception {
