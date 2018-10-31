@@ -35,6 +35,9 @@ public class MybatisTest {
         ////list.add(new Index.Builder(new Article(2, "的嗡嗡嗡", "而分为氛围分为氛围发", "http://dwdwndkj.com", new Date(), "中央", "张三")).build());
         //list.add(new Index.Builder(new Article(4, "分为氛围巴基斯坦分为氛围分为发", "封为贵人个人个体", "http://kkjjkhkjg.com", new Date(), "纷纷无法", "王五")).build());
         //esService.bulkIndex(list, "articleindex", "articletype");
-        esService.createSearch("巴基斯坦");
+        // esService.createSearch("巴基斯坦");
+
+        esService.getDocument("articleindex", "articletype", "AWbFKno499om3Xrll7ry");
+        // esService.searchAll();
     }
 }
