@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author chenzhou
@@ -21,6 +22,32 @@ public class HbaseService {
     @Autowired
     private Configuration configuration;
 
+    /**
+     * 创建命名空间
+     *
+     * @param Name
+     * @param creator
+     */
+    public void createNameSpace(String Name, String creator) {
+        Connection connection = null;
+        try {
+            connection = ConnectionFactory.createConnection(configuration);
+            Admin admin = connection.getAdmin();
+            NamespaceDescriptor namespaceDescriptor = NamespaceDescriptor.create(Name)
+                    .addConfiguration("creator", creator)
+                    .addConfiguration("createTime", String.valueOf(System.currentTimeMillis())).build();
+            admin.createNamespace(namespaceDescriptor);
+            admin.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     /**
      * 判断表是否存在
@@ -51,22 +78,29 @@ public class HbaseService {
      * 创建表
      *
      * @param tableName
+     * @param minVersions
      * @param columnFamily
-     * @return
      */
-    public boolean createTable(String tableName, String... columnFamily) {
-        boolean flag = false;
+    public void createTable(String tableName, Integer minVersions, String... columnFamily) {
         Connection connection = null;
         try {
             connection = ConnectionFactory.createConnection(configuration);
             Admin admin = connection.getAdmin();
             if (!isTableExits(tableName)) {
+                //创建表描述器
                 HTableDescriptor hTableDescriptor = new HTableDescriptor(TableName.valueOf(tableName));
                 Arrays.stream(columnFamily).forEach(column -> {
+                    //创建列描述器
+                    HColumnDescriptor hColumnDescriptor = new HColumnDescriptor(column);
+                    // 设置快缓存
+                    hColumnDescriptor.setBlockCacheEnabled(true);
+                    hColumnDescriptor.setBlocksize(2 * 1024 * 1024);
+                    // 设置版本确界
+                    hColumnDescriptor.setMinVersions(minVersions);
+                    hColumnDescriptor.setMaxVersions(minVersions);
                     hTableDescriptor.addFamily(new HColumnDescriptor(column));
                 });
                 admin.createTable(hTableDescriptor);
-                flag = true;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,7 +111,6 @@ public class HbaseService {
                 e.printStackTrace();
             }
         }
-        return flag;
     }
 
     /**
@@ -139,6 +172,26 @@ public class HbaseService {
         }
     }
 
+
+    //public void addRow(String tableName, List<String> rowKey, String columFamily, String column, String value) {
+    //    Connection connection = null;
+    //    try {
+    //        connection = ConnectionFactory.createConnection(configuration);
+    //        Table table = connection.getTable(TableName.valueOf(tableName));
+    //        Put put = new Put(Bytes.toBytes(rowKey));
+    //        put.addColumn(Bytes.toBytes(columFamily), Bytes.toBytes(column), Bytes.toBytes(value));
+    //        table.put(put);
+    //    } catch (IOException e) {
+    //        e.printStackTrace();
+    //    } finally {
+    //        try {
+    //            connection.close();
+    //        } catch (IOException e) {
+    //            e.printStackTrace();
+    //        }
+    //    }
+    //}
+
     /**
      * @param tableName
      */
@@ -156,6 +209,7 @@ public class HbaseService {
                     System.out.println("列族: " + Bytes.toString(CellUtil.cloneFamily(cell)));
                     System.out.println("列: " + Bytes.toString(CellUtil.cloneQualifier(cell)));
                     System.out.println("值: " + Bytes.toString(CellUtil.cloneValue(cell)));
+                    System.out.println("======================");
 
                 });
             });
@@ -198,4 +252,34 @@ public class HbaseService {
         }
     }
 
+    /**
+     * 获取一条数据
+     *
+     * @param tableName
+     * @param rowKey
+     * @param columnFamily
+     * @return
+     */
+    public Result getRecord(String tableName, String rowKey, String columnFamily) {
+        Connection connection = null;
+        try {
+            connection = ConnectionFactory.createConnection(configuration);
+            Table table = connection.getTable(TableName.valueOf(tableName));
+            Get get = new Get(Bytes.toBytes(rowKey));
+            if (columnFamily != null) {
+                get.addFamily(Bytes.toBytes(columnFamily));
+            }
+            Result result = table.get(get);
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 }
