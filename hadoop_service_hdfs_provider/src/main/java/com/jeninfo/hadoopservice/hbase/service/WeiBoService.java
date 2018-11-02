@@ -4,7 +4,10 @@ import com.jeninfo.hadoopservice.service.HbaseService;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.Cell;
 import org.apache.hadoop.hbase.CellUtil;
+import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.Table;
+import org.apache.hadoop.hbase.util.Bytes;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -43,7 +46,7 @@ public class WeiBoService {
         hbaseService.createTable(TABLE_RELATION, 1, new String[]{"attends", "fans"});
 
         // 列族：info,列：当前用户所关注的人的用户id,value：微博rowkey,rowkey：用户id
-        hbaseService.createTable(TABLE_RELATION, 100, new String[]{"attends", "fans"});
+        hbaseService.createTable(TABLE_RELATION, 100, new String[]{"info"});
     }
 
     /**
@@ -60,17 +63,17 @@ public class WeiBoService {
         hbaseService.addRow(TABLE_CONTENT, rowkey, "info", "content", content);
 
         // b、向发布微博人的粉丝的收件箱表中，添加该微博rowkey
-        List<byte[]> fans = new ArrayList<>();
+        List<String> fans = new ArrayList<>();
         Result fansResult = hbaseService.getRecord(TABLE_RELATION, userId, "fans");
         Cell[] cells = fansResult.rawCells();
         Arrays.stream(cells).forEach(cell -> {
-            fans.add(CellUtil.cloneValue(cell));
+            fans.add(Bytes.toString(CellUtil.cloneValue(cell)));
         });
         //如果没有粉丝，则不需要操作粉丝的收件箱表
         if (fans.size() <= 0) {
             return;
         }
-
-
+        //向收件箱表放置数据
+        hbaseService.addRow(TABLE_INBOX, fans, "info", userId, ts, rowkey);
     }
 }

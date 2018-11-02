@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -173,24 +174,29 @@ public class HbaseService {
     }
 
 
-    //public void addRow(String tableName, List<String> rowKey, String columFamily, String column, String value) {
-    //    Connection connection = null;
-    //    try {
-    //        connection = ConnectionFactory.createConnection(configuration);
-    //        Table table = connection.getTable(TableName.valueOf(tableName));
-    //        Put put = new Put(Bytes.toBytes(rowKey));
-    //        put.addColumn(Bytes.toBytes(columFamily), Bytes.toBytes(column), Bytes.toBytes(value));
-    //        table.put(put);
-    //    } catch (IOException e) {
-    //        e.printStackTrace();
-    //    } finally {
-    //        try {
-    //            connection.close();
-    //        } catch (IOException e) {
-    //            e.printStackTrace();
-    //        }
-    //    }
-    //}
+    public void addRow(String tableName, List<String> rowKeys, String columFamily, String column, long ts, String value) {
+        Connection connection = null;
+        try {
+            List<Put> puts = new ArrayList<>();
+
+            connection = ConnectionFactory.createConnection(configuration);
+            Table table = connection.getTable(TableName.valueOf(tableName));
+            rowKeys.forEach(rowKey -> {
+                Put put = new Put(Bytes.toBytes(rowKey));
+                put.addColumn(Bytes.toBytes(columFamily), Bytes.toBytes(column), ts, Bytes.toBytes(value));
+                puts.add(put);
+            });
+            table.put(puts);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     /**
      * @param tableName
