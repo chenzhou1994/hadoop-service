@@ -19,4 +19,8 @@ public class UserService {
     public List<User> selectAll(Integer page, Integer pageSize) {
         return PageHelper.startPage(page, pageSize).doSelectPage(() -> userMapper.selectAll());
     }
+
+    public User selectById(String id) {
+        return userMapper.selectByPrimaryKey(Integer.parseInt(id));
+    }
 }
