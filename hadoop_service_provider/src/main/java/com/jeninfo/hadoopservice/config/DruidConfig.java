@@ -38,7 +38,6 @@ public class DruidConfig {
         initParams.put("loginPassword","123456");
         //默认就是允许所有访问
         initParams.put("allow","");
-        initParams.put("deny","192.168.15.21");
         bean.setInitParameters(initParams);
         return bean;
     }

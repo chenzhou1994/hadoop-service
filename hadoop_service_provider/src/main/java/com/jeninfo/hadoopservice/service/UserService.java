@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.jeninfo.hadoopservice.dao.UserMapper;
 import com.jeninfo.hadoopservice.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,10 @@ public class UserService {
         return PageHelper.startPage(page, pageSize).doSelectPage(() -> userMapper.selectAll());
     }
 
+    @Cacheable(cacheNames = {"user"})
     public User selectById(String id) {
         return userMapper.selectByPrimaryKey(Integer.parseInt(id));
     }
+
+
 }

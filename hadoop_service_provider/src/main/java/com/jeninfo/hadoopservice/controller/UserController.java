@@ -18,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/select/all", method = RequestMethod.GET)
-    public Msg selectAll(@RequestParam String page, @RequestParam String pageSize) {
+    public Msg selectAll(@RequestParam(value = "page", required = false, defaultValue = "1") String page, @RequestParam(value = "pageSize", required = false, defaultValue = "10") String pageSize) {
         return Msg.renderSuccess("处理成功", 0x342, userService.selectAll(Integer.parseInt(page), Integer.parseInt(pageSize)));
     }
 
