@@ -27,6 +27,19 @@ spring:
   elasticsearch:
     jest:
       uris: http://47.98.236.124:9200
+  kafka:
+    bootstrap-servers: 192.168.74.150:9092 #指定kafka 代理地址，可以多个
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer #指定消息key和消息体的编解码方式
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: 0 #发送失败后再发送的次数
+      batch-size: 16384  #批处理发送消息的数量
+      buffer-memory: 33554432
+      acks: all
+    consumer:
+      group-id: 0
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer #指定消息key和消息体的编解码方式
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 mybatis:
   config-location: classpath:mybatis/mybatis.cfg.xml
   mapper-locations: classpath:mapper/*

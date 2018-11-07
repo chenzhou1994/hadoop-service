@@ -35,7 +35,7 @@ public class MVCTest {
     @Test
     public void testPage() throws Exception {
         //模拟请求拿到返回值
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/admin/user/selectAll")
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/topic/send")
                 .param("page", "1")
                 .param("pageSize", "10"))
                 .andReturn();
