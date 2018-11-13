@@ -40,6 +40,9 @@ spring:
       group-id: 0
       key-serializer: org.apache.kafka.common.serialization.StringSerializer #指定消息key和消息体的编解码方式
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  redis:
+    host: 192.168.74.151
+    port: 6379
 mybatis:
   config-location: classpath:mybatis/mybatis.cfg.xml
   mapper-locations: classpath:mapper/*
