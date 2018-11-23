@@ -11,8 +11,6 @@
         <module>hadoop_service_bean</module>
         <module>hadoop_service_provider</module>
         <module>hadoop_service_consumer</module>
-        <module>hadoop_service_hdfs_provider</module>
-        <module>hadoop_service_eureka</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -73,6 +71,7 @@
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+            <!-- 以下是我自己加的-->
             <!-- MBG -->
             <!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core -->
             <dependency>
