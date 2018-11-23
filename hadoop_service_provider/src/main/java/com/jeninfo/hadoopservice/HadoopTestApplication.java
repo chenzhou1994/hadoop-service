@@ -10,7 +10,6 @@ import org.springframework.cache.annotation.EnableCaching;
  */
 @MapperScan("com.jeninfo.hadoopservice.dao")
 @SpringBootApplication
-@EnableCaching
 public class HadoopTestApplication {
 
     public static void main(String[] args) {

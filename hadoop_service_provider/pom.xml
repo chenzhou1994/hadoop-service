@@ -12,28 +12,19 @@
     <artifactId>hadoop_service_provider</artifactId>
 
     <dependencies>
+        <!--引入自定义的api包-->
         <dependency>
             <groupId>com.jeninfo</groupId>
             <artifactId>hadoop_service_bean</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- actuator监控信息完善 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <!-- 将微服务provider侧注册进eureka -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -57,10 +48,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
@@ -76,6 +63,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
+        <!--以下是自己添加的-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -88,37 +76,11 @@
             <groupId>org.mybatis.generator</groupId>
             <artifactId>mybatis-generator-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-            <version>2.2.3</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.searchbox/jest -->
-        <dependency>
-            <groupId>io.searchbox</groupId>
-            <artifactId>jest</artifactId>
-            <version>5.3.3</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
-            <version>5.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>transport</artifactId>
-            <version>5.2.2</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.11.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
     </dependencies>
 </project>

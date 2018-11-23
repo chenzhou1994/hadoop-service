@@ -21,10 +21,7 @@ public class UserService {
         return PageHelper.startPage(page, pageSize).doSelectPage(() -> userMapper.selectAll());
     }
 
-    @Cacheable(cacheNames = {"user"})
     public User selectById(String id) {
         return userMapper.selectByPrimaryKey(Integer.parseInt(id));
     }
-
-
 }
