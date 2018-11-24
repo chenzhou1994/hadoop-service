@@ -24,8 +24,23 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  application:
+    name: hadoop_service_provider
+
 mybatis:
   config-location: classpath:mybatis/mybatis.cfg.xml
   mapper-locations: classpath:mapper/*
 
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+       defaultZone: http://localhost:7001/eureka
+    instance:
+        instance-id: hadoop_service_provider
+        prefer-ip-address: true     #访问路径可以显示IP地址
 
+info:
+  app.name: hadoop_service_provider
+  company.name: www.atguigu.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
