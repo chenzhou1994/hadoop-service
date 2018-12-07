@@ -12,6 +12,7 @@
         <module>hadoop_service_provider</module>
         <module>hadoop_service_consumer</module>
         <module>hadoop_service_eureka</module>
+        <module>hadoop_service_zuul</module>
     </modules>
     <packaging>pom</packaging>
 

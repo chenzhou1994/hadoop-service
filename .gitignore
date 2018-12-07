@@ -3,3 +3,4 @@ hadoop_service_bean/target/
 hadoop_service_consumer/target/
 hadoop_service_provider/target/
 hadoop_service_eureka/target/
+hadoop_service_zuul/target/
