@@ -1,5 +1,7 @@
 package com.jeninfo.hadoopservice.mybatis;
 
+import com.jeninfo.hadoopservice.dao.DeptMapper;
+import com.jeninfo.hadoopservice.dao.UserMapper;
 import com.jeninfo.hadoopservice.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +18,11 @@ public class MybatisTest {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private DeptMapper deptMapper;
+
     @Test
     public void test01() {
+        deptMapper.selectList(null).forEach(System.out::println);
     }
 }

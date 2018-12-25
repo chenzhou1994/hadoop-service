@@ -1,5 +1,6 @@
 package com.jeninfo.hadoopservice.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jeninfo.hadoopservice.model.Dept;
 
 import java.util.List;
@@ -7,43 +8,6 @@ import java.util.List;
 /**
  * @author chenzhou
  */
-public interface DeptMapper {
-    /**
-     * 删除
-     *
-     * @param id
-     * @return
-     */
-    int deleteByPrimaryKey(Integer id);
+public interface DeptMapper extends BaseMapper<Dept> {
 
-    /**
-     * 新增
-     *
-     * @param record
-     * @return
-     */
-    int insert(Dept record);
-
-    /**
-     * 根据主键查找
-     *
-     * @param id
-     * @return
-     */
-    Dept selectByPrimaryKey(Integer id);
-
-    /**
-     * 获取所有
-     *
-     * @return
-     */
-    List<Dept> selectAll();
-
-    /**
-     * 更新
-     *
-     * @param record
-     * @return
-     */
-    int updateByPrimaryKey(Dept record);
 }

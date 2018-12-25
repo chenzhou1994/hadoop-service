@@ -13,6 +13,7 @@
         <module>hadoop_service_consumer</module>
         <module>hadoop_service_eureka</module>
         <module>hadoop_service_zuul</module>
+        <module>hadoop_service_config</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -114,6 +115,7 @@
                     </delimiters>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>
