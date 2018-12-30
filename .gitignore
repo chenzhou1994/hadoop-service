@@ -1,4 +1,5 @@
 .idea
+*.iml
 hadoop_service_bean/target/
 hadoop_service_consumer/target/
 hadoop_service_provider/target/

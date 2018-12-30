@@ -1,1 +1,0 @@
-mvn sonar:sonar -Dsonar.projectKey=wychenzhou_hadoop-service -Dsonar.organization=wychenzhou-github  -Dsonar.host.url=https://sonarcloud.io   -Dsonar.login=04b185c0f5d41f43b874ae355fc277b7716abf12
