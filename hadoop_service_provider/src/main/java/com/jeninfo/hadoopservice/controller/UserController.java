@@ -1,7 +1,10 @@
 package com.jeninfo.hadoopservice.controller;
 
-import com.jeninfo.hadoopservice.Msg;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.jeninfo.hadoopservice.model.User;
 import com.jeninfo.hadoopservice.service.UserService;
+import com.jeninfo.hadoopservice.vo.BaseController;
+import com.jeninfo.hadoopservice.vo.Render;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -13,23 +16,18 @@ import java.util.List;
  * @author chenzhou
  */
 @RestController
-@RequestMapping(value = "/admin/user")
-public class UserController {
+@RequestMapping(value = "/api/admin/user")
+public class UserController extends BaseController {
     @Autowired
     private UserService userService;
     @Autowired
     private DiscoveryClient discoveryClient;
 
     @RequestMapping(value = "/select/all", method = RequestMethod.GET)
-    public Msg selectAll(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page, @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
-        return Msg.renderSuccess("处理成功", 0x342, userService.selectByPage(page, pageSize));
+    public Render selectAll(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page, @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+        IPage<User> userIPage = userService.selectByPage(page, pageSize);
+        return this.renderPage(userIPage.getRecords(), page, pageSize, userIPage.getTotal(), 0x111, "获取成功");
     }
-
-    @RequestMapping(value = "/select/{id}", method = RequestMethod.GET)
-    public Msg selectById(@PathVariable("id") String id) {
-        return Msg.renderSuccess("处理成功", 0x342, userService.selectById(id));
-    }
-
 
     @RequestMapping(value = "/select/discovery", method = RequestMethod.GET)
     public Object discovery() {

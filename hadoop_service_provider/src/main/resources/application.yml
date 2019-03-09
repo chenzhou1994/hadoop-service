@@ -1,13 +1,14 @@
 server:
   port: 8001
 spring:
+  application:
+    name: hadoop_service_provider
   datasource:
     username: root
     password: root
     url: jdbc:mysql://114.116.55.5:3306/db01
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-
     initialSize: 5
     minIdle: 5
     maxActive: 20
@@ -24,8 +25,6 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
-  application:
-    name: hadoop_service_provider
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml

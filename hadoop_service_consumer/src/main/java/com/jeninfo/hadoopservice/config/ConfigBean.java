@@ -5,11 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * @author chenzhou
+ * @Author chenzhou
+ * @Date 2019/3/9 15:56
+ * @Description
  */
 @Configuration
 public class ConfigBean {
-
     @Bean
     public RestTemplate getRestTemplate() {
         return new RestTemplate();

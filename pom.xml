@@ -22,6 +22,7 @@
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <lombok.version>1.16.18</lombok.version>
+        <flyway-core.version>5.2.1</flyway-core.version>
     </properties>
 
     <!--仅仅声明所需要的依赖-->
@@ -73,8 +74,6 @@
                 <version>${log4j.version}</version>
             </dependency>
             <!-- 以下是我自己加的-->
-            <!-- MBG -->
-
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
@@ -84,6 +83,12 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>3.0.6</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-core</artifactId>
+                <version>${flyway-core.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -106,7 +111,6 @@
                     </delimiters>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 </project>
