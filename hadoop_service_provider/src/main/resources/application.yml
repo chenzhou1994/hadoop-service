@@ -30,7 +30,10 @@ mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
   type-aliases-package: com.geninfo.*.model
 
-
 logging:
   level:
     com.jeninfo.hadoopservice.dao: debug
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
