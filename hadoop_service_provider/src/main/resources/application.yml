@@ -3,8 +3,8 @@ server:
 spring:
   datasource:
     username: root
-    password: 123456
-    url: jdbc:mysql://47.98.236.124:3306/db01
+    password: root
+    url: jdbc:mysql://114.116.55.5:3306/db01
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
@@ -27,20 +27,11 @@ spring:
   application:
     name: hadoop_service_provider
 
-mybatis:
-  config-location: classpath:mybatis/mybatis.cfg.xml
-  mapper-locations: classpath:mapper/*
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  type-aliases-package: com.geninfo.*.model
 
-eureka:
-  client: #客户端注册进eureka服务列表内
-    service-url:
-       defaultZone: http://localhost:7001/eureka
-    instance:
-        instance-id: hadoop_service_provider
-        prefer-ip-address: true     #访问路径可以显示IP地址
 
-info:
-  app.name: hadoop_service_provider
-  company.name: www.atguigu.com
-  build.artifactId: $project.artifactId$
-  build.version: $project.version$
+logging:
+  level:
+    com.jeninfo.hadoopservice.dao: debug
