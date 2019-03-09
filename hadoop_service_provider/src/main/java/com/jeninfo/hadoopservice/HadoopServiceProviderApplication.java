@@ -12,6 +12,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @MapperScan("com.jeninfo.hadoopservice.dao")
 @SpringBootApplication
 @EnableEurekaClient
+@EnableDiscoveryClient
 public class HadoopServiceProviderApplication {
 
     public static void main(String[] args) {

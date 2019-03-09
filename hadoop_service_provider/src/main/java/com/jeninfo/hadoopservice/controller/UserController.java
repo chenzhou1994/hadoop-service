@@ -23,15 +23,28 @@ public class UserController extends BaseController {
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    /**
+     * 查询全部
+     *
+     * @param page
+     * @param pageSize
+     * @return
+     */
     @RequestMapping(value = "/select/all", method = RequestMethod.GET)
     public Render selectAll(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page, @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         IPage<User> userIPage = userService.selectByPage(page, pageSize);
         return this.renderPage(userIPage.getRecords(), page, pageSize, userIPage.getTotal(), 0x111, "获取成功");
     }
 
+    /**
+     * 服务发现
+     *
+     * @return
+     */
     @RequestMapping(value = "/select/discovery", method = RequestMethod.GET)
     public Object discovery() {
         List<String> list = discoveryClient.getServices();
+        System.out.println(list);
         List<ServiceInstance> srvList = discoveryClient.getInstances("HADOOP_SERVICE_PROVIDER");
         for (ServiceInstance element : srvList) {
             System.out.println(element.getServiceId() + "\t" + element.getHost() + "\t" + element.getPort() + "\t"

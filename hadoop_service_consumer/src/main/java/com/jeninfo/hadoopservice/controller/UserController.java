@@ -25,4 +25,9 @@ public class UserController {
     public Render selectAll(@RequestParam Integer page, @RequestParam Integer pageSize) {
         return restTemplate.getForObject(REST_URL + "/api/admin/user/select/all?page=" + page + "&pageSize=" + pageSize, Render.class);
     }
+
+    @RequestMapping(value = "/select/discovery")
+    public Object discovery(@RequestParam Integer page, @RequestParam Integer pageSize) {
+        return restTemplate.getForObject(REST_URL + "/api/admin/user/select/discovery",Object.class);
+    }
 }
