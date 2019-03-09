@@ -45,7 +45,7 @@ public class UserController extends BaseController {
     public Object discovery() {
         List<String> list = discoveryClient.getServices();
         System.out.println(list);
-        List<ServiceInstance> srvList = discoveryClient.getInstances("HADOOP_SERVICE_PROVIDER");
+        List<ServiceInstance> srvList = discoveryClient.getInstances("HADOOP-SERVICE-PROVIDER");
         for (ServiceInstance element : srvList) {
             System.out.println(element.getServiceId() + "\t" + element.getHost() + "\t" + element.getPort() + "\t"
                     + element.getUri());

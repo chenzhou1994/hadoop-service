@@ -2,7 +2,7 @@ server:
   port: 8001
 spring:
   application:
-    name: hadoop_service_provider
+    name: hadoop-service-provider
   datasource:
     username: root
     password: root
@@ -39,11 +39,11 @@ eureka:
     service-url:
       defaultZone: http://localhost:7001/eureka
   instance:
-    instance-id: provider_service
+    instance-id: provider-service
     prefer-ip-address: true
 
 info:
-  app.name: hadoop_service_provider
+  app.name: hadoop-service-provider
   cpmpany.name: geninfo
   build.artifactId: $project.artifactId$
   build.version: $project.version$
