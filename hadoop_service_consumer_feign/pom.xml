@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>hadoop_service_consumer_feign</artifactId>
+    <name>hadoop_service_consumer_feign</name>
 
     <dependencies>
         <!--引入自定义的api包-->
@@ -49,4 +50,16 @@
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>${name}</finalName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

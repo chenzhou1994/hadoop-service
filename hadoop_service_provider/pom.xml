@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>hadoop_service_provider</artifactId>
+    <name>hadoop_service_provider</name>
 
     <dependencies>
         <!--引入自定义的api包-->
@@ -98,6 +99,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <finalName>${name}</finalName>
                     <fork>true</fork>
                 </configuration>
             </plugin>

@@ -1,0 +1,79 @@
+version: '2.1'
+services:
+# MYSQL
+  hadoop_service_mysql:
+    image: mysql:5.7
+    container_name: hadoop_service_mysql
+    ports:
+      - 3310:3306
+    volumes:
+      - ./mysql/conf:/etc/mysql/conf.d
+      - ./mysql/db:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+
+# 微服务注册中心
+  registry:
+    build: ./hadoop_service_eureka
+    ports:
+      - 8761:8761
+    container_name: hadoop_service_eureka
+    volumes:
+      - ./hadoop_service_eureka/target:/app/
+    depends_on:
+      config:
+        condition: service_healthy
+
+# 微服务提供者1
+  hadoop_service_provider:
+    build: ./hadoop_service_provider
+    container_name: hadoop_service_provider
+    ports:
+      - 8001:8001
+    volumes:
+      - ./hadoop_service_provider/target:/app/
+    depends_on:
+      registry:
+        condition: service_healthy
+    links:
+      - hadoop_service_mysql:mysql
+
+# 微服务提供者1
+  hadoop_service_provider_two:
+      build: ./hadoop_service_provider_two
+      container_name: hadoop_service_provider_two
+      ports:
+        - 8002:8002
+      volumes:
+        - ./hadoop_service_provider_two/target:/app/
+      depends_on:
+        registry:
+          condition: service_healthy
+      links:
+        - hadoop_service_mysql:mysql
+
+# 微服务提供者1
+  hadoop_service_provider_three:
+      build: ./hadoop_service_provider_three
+      container_name: hadoop_service_provider_three
+      ports:
+        - 8001:8001
+      volumes:
+        - ./hadoop_service_provider_three/target:/app/
+      depends_on:
+        registry:
+          condition: service_healthy
+      links:
+        - hadoop_service_mysql:mysql
+
+# 微服务消费者
+  hadoop_service_consumer_feign:
+      build: ./hadoop_service_consumer_feign
+      container_name: hadoop_service_consumer_feign
+      ports:
+        - 9001:9001
+      volumes:
+        - ./hadoop_service_consumer_feign/target:/app/
+      depends_on:
+        registry:
+          condition: service_healthy
