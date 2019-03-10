@@ -1,5 +1,6 @@
 package com.jeninfo.hadoopservice.controller;
 
+import com.jeninfo.hadoopservice.property.ServiceProperties;
 import com.jeninfo.hadoopservice.vo.Render;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +14,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @RequestMapping(value = "/consumer/user")
 public class UserController {
-    private static final String REST_URL = "http://localhost:8001";
-    private static final String REST_URL_PREFIX = "http://HADOOP-SERVICE-PROVIDER";
+    private static final String REST_URL_PREFIX = "http://" + ServiceProperties.HADOOP_SERVICE_PROVIDER;
 
     @Autowired
     private RestTemplate restTemplate;
