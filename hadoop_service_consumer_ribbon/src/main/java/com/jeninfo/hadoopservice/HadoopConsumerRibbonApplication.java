@@ -14,9 +14,9 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableEurekaClient
 @RibbonClient(name = ServiceProperties.HADOOP_SERVICE_PROVIDER, configuration = MyRibbonRule.class)
-public class HadoopConsumerTestApplication {
+public class HadoopConsumerRibbonApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HadoopConsumerTestApplication.class, args);
+        SpringApplication.run(HadoopConsumerRibbonApplication.class, args);
     }
 }

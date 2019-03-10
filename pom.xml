@@ -10,7 +10,7 @@
     <modules>
         <module>hadoop_service_bean</module>
         <module>hadoop_service_provider</module>
-        <module>hadoop_service_consumer</module>
+        <module>hadoop_service_consumer_ribbon</module>
         <module>hadoop_service_eureka</module>
         <module>hadoop_service_provider_two</module>
         <module>hadoop_service_provider_three</module>
