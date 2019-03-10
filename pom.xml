@@ -15,6 +15,7 @@
         <module>hadoop_service_provider_two</module>
         <module>hadoop_service_provider_three</module>
         <module>hadoop_service_consumer_feign</module>
+        <module>hadoop_service_hdfs_provider</module>
     </modules>
     <packaging>pom</packaging>
 

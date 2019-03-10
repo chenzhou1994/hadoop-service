@@ -8,3 +8,4 @@ hadoop_service_provider_three/target/
 hadoop_service_eureka/target/
 /hadoop_service_consumer_ribbon/target/
 /hadoop_service_consumer_feign/target/
+/hadoop_service_hdfs_provider/target/
