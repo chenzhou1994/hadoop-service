@@ -5,6 +5,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.CombineTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
@@ -41,6 +42,11 @@ public class WordCountMain {
         // 6.1 设置分区
         job.setPartitionerClass(WordCountPartitioner.class);
         job.setNumReduceTasks(2);
+
+        // 6.2 大量小文件
+        //job.setInputFormatClass(CombineTextInputFormat.class);
+        //CombineTextInputFormat.setMaxInputSplitSize(job, 4194304);
+        //CombineTextInputFormat.setMinInputSplitSize(job, 2097152);
 
         // 7 将job中配置的相关参数，以及job所用的java类所在的jar包， 提交给yarn去运行
         job.submit();
