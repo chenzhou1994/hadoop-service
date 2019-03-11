@@ -38,9 +38,13 @@ public class WordCountMain {
         // 6 指定本程序的jar包所在的本地路径
         job.setJarByClass(WordCountMain.class);
 
+        // 6.1 设置分区
+        job.setPartitionerClass(WordCountPartitioner.class);
+        job.setNumReduceTasks(2);
+
         // 7 将job中配置的相关参数，以及job所用的java类所在的jar包， 提交给yarn去运行
         job.submit();
         boolean result = job.waitForCompletion(true);
-        System.exit(result?0:1);
+        System.exit(result ? 0 : 1);
     }
 }
