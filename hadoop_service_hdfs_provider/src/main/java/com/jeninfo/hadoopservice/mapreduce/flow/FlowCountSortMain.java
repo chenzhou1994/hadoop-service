@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * @Author chenzhou
  * @Date 2019/3/12 20:37
- * @Description
+ * @Description 对产生的结果再次对总流量进行排序
  */
 public class FlowCountSortMain {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
@@ -38,8 +38,8 @@ public class FlowCountSortMain {
         job.setOutputValueClass(Text.class);
 
         // 5 指定job的输入原始文件所在目录
-        FileInputFormat.setInputPaths(job, new Path(""));
-        FileOutputFormat.setOutputPath(job, new Path(""));
+        FileInputFormat.setInputPaths(job, new Path("F:\\WORKSPACE\\big_datas\\mr\\phone_result.txt"));
+        FileOutputFormat.setOutputPath(job, new Path("F:\\WORKSPACE\\big_datas\\mr\\result"));
 
         // 6 指定本程序的jar包所在的本地路径
         job.setJarByClass(FlowCountSortMain.class);
@@ -56,7 +56,7 @@ public class FlowCountSortMain {
 
     /**
      * map阶段
-     * 输出格式：< 手机号, flowBean('上行流量'，'下行流量','总流量') >
+     * 输出格式：< flowBean('上行流量'，'下行流量','总流量') ,手机号 >
      */
     public static class FlowCountSortMapper extends Mapper<LongWritable, Text, FlowBean, Text> {
         private Text phone = new Text();
@@ -72,8 +72,8 @@ public class FlowCountSortMain {
             String phoneNbr = fields[0];
 
             // 4 取出上行流量和下行流量
-            long upFlow = Long.parseLong(fields[fields.length - 3]);
-            long downFlow = Long.parseLong(fields[fields.length - 2]);
+            long upFlow = Long.parseLong(fields[1]);
+            long downFlow = Long.parseLong(fields[2]);
 
             // 3 封装对象
             flowBean.setUpFlow(upFlow).setDownFlow(downFlow).setSumFlow(upFlow + downFlow);

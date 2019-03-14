@@ -17,7 +17,6 @@ import java.io.IOException;
  */
 @NoArgsConstructor
 @Data
-@ToString()
 @Accessors(chain = true)
 public class FlowBean implements WritableComparable<FlowBean> {
     private long upFlow;
@@ -68,5 +67,10 @@ public class FlowBean implements WritableComparable<FlowBean> {
     public int compareTo(FlowBean o) {
         // 倒序排列，从大到小
         return this.sumFlow > o.getSumFlow() ? -1 : 1;
+    }
+
+    @Override
+    public String toString() {
+        return upFlow + "\t" + downFlow + "\t" + sumFlow;
     }
 }

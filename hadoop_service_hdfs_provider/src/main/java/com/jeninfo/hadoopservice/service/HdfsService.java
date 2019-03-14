@@ -1,15 +1,14 @@
 package com.jeninfo.hadoopservice.service;
 
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.fs.LocatedFileStatus;
-import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.fs.RemoteIterator;
+import org.apache.hadoop.fs.*;
 import org.apache.hadoop.fs.permission.FsPermission;
+import org.apache.hadoop.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -42,6 +41,23 @@ public class HdfsService {
     }
 
     /**
+     * 查看目录
+     *
+     * @param path
+     * @throws IOException
+     */
+    public void getFileSystem(String path) throws IOException {
+        FileStatus[] fileStatuses = fileSystem.listStatus(new Path(path));
+        Arrays.stream(fileStatuses).forEach((file) -> {
+            if (file.isFile()) {
+                System.out.println("文件---" + file.getPath().getName());
+            } else {
+                System.out.println("文件夹--" + file.getPath().getName());
+            }
+        });
+    }
+
+    /**
      * 文件上传
      *
      * @param localPath
@@ -63,6 +79,20 @@ public class HdfsService {
     public void getFileFromHdfs(String localPath, String hdfsPath) throws Exception {
         fileSystem.copyToLocalFile(false, new Path(hdfsPath), new Path(localPath), true);
         fileSystem.close();
+    }
+
+    /**
+     * 读取文件内容
+     *
+     * @param path
+     * @throws Exception
+     */
+    public void readContext(String path) throws Exception {
+        // 打开文件输入流
+        FSDataInputStream in = fileSystem.open(new Path(path));
+        IOUtils.copyBytes(in, System.out, 4096, false);
+        // 关闭流
+        IOUtils.closeStream(in);
     }
 
     /**
