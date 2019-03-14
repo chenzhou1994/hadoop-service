@@ -63,12 +63,6 @@ public class TableBean implements Writable {
 
     @Override
     public String toString() {
-        return "TableBean{" +
-                "orderId='" + orderId + '\'' +
-                ", pId='" + pId + '\'' +
-                ", amount=" + amount +
-                ", pname='" + pname + '\'' +
-                ", flag='" + flag + '\'' +
-                '}';
+        return orderId + '\t' + pname + "\t" + amount;
     }
 }
