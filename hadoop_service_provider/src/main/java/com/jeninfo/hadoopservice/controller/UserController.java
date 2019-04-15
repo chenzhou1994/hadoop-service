@@ -38,13 +38,13 @@ public class UserController extends BaseController {
         return this.renderPage(userIPage.getRecords(), page, pageSize, userIPage.getTotal(), 0x111, "获取成功");
     }
 
-    @RequestMapping(value = "/select/{id}", method = RequestMethod.GET)
-    @HystrixCommand(fallbackMethod = "fallbackSelectById")
-    public Render selectAll(@PathVariable("id") String id) {
-        User user = userService.selectById(id);
-        if (user == null) {
-            throw new RuntimeException("该ID" + id + "没有对应记录！");
-        }
+    @RequestMapping(value = "/selectOne/{id}", method = RequestMethod.GET)
+    // @HystrixCommand(fallbackMethod = "fallbackSelectById")
+    public Render selectById(@PathVariable("id") String id) {
+        //User user = userService.selectById(id);
+        //if (user == null) {
+        //    throw new RuntimeException("该ID" + id + "没有对应记录！");
+        //}
         return this.renderSuccess(userService.selectById(id), 0x1111, "获取成功!");
     }
 

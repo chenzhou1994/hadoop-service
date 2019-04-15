@@ -4,6 +4,7 @@ import com.jeninfo.hadoopservice.client.ProviderFeignClient;
 import com.jeninfo.hadoopservice.property.ServiceProperties;
 import com.jeninfo.hadoopservice.vo.Render;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,5 +23,10 @@ public class UserController {
     @RequestMapping(value = "/select/all")
     public Render selectAll(@RequestParam(required = false, defaultValue = "1") Integer page, @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
         return providerFeignClient.selectAll(page, pageSize);
+    }
+
+    @RequestMapping(value = "/selectOne/{id}")
+    public Render selectOne(@PathVariable("id") String id) {
+        return providerFeignClient.select(id);
     }
 }

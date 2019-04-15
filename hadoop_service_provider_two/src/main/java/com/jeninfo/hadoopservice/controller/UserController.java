@@ -51,21 +51,4 @@ public class UserController extends BaseController {
     public Render fallbackSelectById(@PathVariable("id") String id) {
         return this.renderSuccess(new User().setId(UUID.randomUUID().toString()).setName("该ID" + id + "没有对应记录！").setPwd(""), 0x1111, "获取成功!");
     }
-
-    /**
-     * 服务发现
-     *
-     * @return
-     */
-    @RequestMapping(value = "/select/discovery", method = RequestMethod.GET)
-    public Object discovery() {
-        List<String> list = discoveryClient.getServices();
-        System.out.println(list);
-        List<ServiceInstance> srvList = discoveryClient.getInstances("HADOOP-SERVICE-PROVIDER");
-        for (ServiceInstance element : srvList) {
-            System.out.println(element.getServiceId() + "\t" + element.getHost() + "\t" + element.getPort() + "\t"
-                    + element.getUri());
-        }
-        return this.discoveryClient;
-    }
 }
