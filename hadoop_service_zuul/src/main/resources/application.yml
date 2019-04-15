@@ -1,0 +1,27 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: hadoop-service-zuul
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: hadoop-service-zuul
+    prefer-ip-address: true
+
+zuul:
+  routes:
+    provider.serviceId: hadoop-service-provider
+    provider.path: /uaa/**
+  ignored-services: "*"
+
+info:
+  app.name: hadoop-service-provider
+  cpmpany.name: geninfo
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
