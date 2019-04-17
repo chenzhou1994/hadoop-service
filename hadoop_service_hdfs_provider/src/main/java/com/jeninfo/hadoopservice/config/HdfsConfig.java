@@ -18,6 +18,8 @@ public class HdfsConfig {
             //获取配置文件信息
             org.apache.hadoop.conf.Configuration conf = new org.apache.hadoop.conf.Configuration();
             conf.set("fs.defaultFS", "file:///");
+            // conf.set("fs.defaultFS", "hdfs://192.168.1.221:9000");
+            // System.setProperty("HADOOP_USER_NAME", "root");
             //获取文件系统
             hdfs = FileSystem.get(conf);
         } catch (Exception e) {
