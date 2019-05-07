@@ -39,20 +39,11 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "/selectOne/{id}", method = RequestMethod.GET)
-    // @HystrixCommand(fallbackMethod = "fallbackSelectById")
     public Render selectById(@PathVariable("id") String id) {
-        //User user = userService.selectById(id);
-        //if (user == null) {
-        //    throw new RuntimeException("该ID" + id + "没有对应记录！");
-        //}
         return this.renderSuccess(userService.selectById(id), 0x1111, "获取成功!");
     }
 
-    public Render fallbackSelectById(@PathVariable("id") String id) {
-        return this.renderSuccess(new User().setId(UUID.randomUUID().toString()).setName("该ID" + id + "没有对应记录！").setPwd(""), 0x1111, "获取成功!");
-    }
-
-    /**
+   /**
      * 服务发现
      *
      * @return
